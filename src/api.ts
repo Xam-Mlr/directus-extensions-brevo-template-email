@@ -38,15 +38,15 @@ export default defineOperationApi<Options>({
 
 			console.log('API called successfully');
 			return({
-				status:"successful"
+				status:"Successful"
 			});
 		}
 		catch(error:any){
 
 			console.log(error.body);
 			return({
-				status:"error",
-				details : error.body
+				name:"Error",
+				message: error.body
 			})
 		}
 
