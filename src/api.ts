@@ -42,7 +42,7 @@ export default defineOperationApi<Options>({
 			});
 		}
 		catch(error:any){
-			
+
 			console.log(error.body);
 			return({
 				status:"error",
@@ -52,18 +52,3 @@ export default defineOperationApi<Options>({
 
 	},
 });
-
-
-		/*apiInstance.sendTransacEmail(sendSmtpEmail).then(()=>{
-			console.log('API called successfully');
-			return({
-				status:"successful"
-			});
-		  },
-		  (error)=>{
-			console.log(error.body)
-			return({
-				status:"error",
-				details : error.body
-			})
-		});*/
