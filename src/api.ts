@@ -15,7 +15,7 @@ type Options = {
 
 export default defineOperationApi<Options>({
 	id: 'operation-template-brevo',
-	handler: ({ to, brevo_api_key, template_id, template_data}) => {
+	handler: async ({ to, brevo_api_key, template_id, template_data}) => {
 
 		let apiInstance = new brevo.TransactionalEmailsApi();
 		apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, brevo_api_key)
@@ -32,19 +32,38 @@ export default defineOperationApi<Options>({
 			{}
 		);
 		sendSmtpEmail.params = params;
-		console.log({
-			to : to,
-			template_id : template_id,
-			params: params,
-		});
 		
-		console.log("Template_id : ", template_id)
-		console.log("Sending Mail")
+		try{
+			await apiInstance.sendTransacEmail(sendSmtpEmail);
 
-		apiInstance.sendTransacEmail(sendSmtpEmail).then(()=>{
 			console.log('API called successfully');
-		  }, function (error) {
-			console.error(error);
-		});
+			return({
+				status:"successful"
+			});
+		}
+		catch(error:any){
+			
+			console.log(error.body);
+			return({
+				status:"error",
+				details : error.body
+			})
+		}
+
 	},
 });
+
+
+		/*apiInstance.sendTransacEmail(sendSmtpEmail).then(()=>{
+			console.log('API called successfully');
+			return({
+				status:"successful"
+			});
+		  },
+		  (error)=>{
+			console.log(error.body)
+			return({
+				status:"error",
+				details : error.body
+			})
+		});*/

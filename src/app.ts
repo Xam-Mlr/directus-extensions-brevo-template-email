@@ -5,10 +5,14 @@ export default defineOperationApp({
 	name: 'Brevo Template Email',
 	icon: 'mail',
 	description: 'This operation allows you to send template mails through Brevo API',
-	overview: ({ text }) => [
+	overview: ({ to, template_id}) => [ //retriving data for the preview
 		{
-			label: 'Text',
-			text: text,
+			label: 'To',
+			text: to,
+		},
+        {
+			label: 'Template id',
+			text: template_id,
 		},
 	],
 	options: [
