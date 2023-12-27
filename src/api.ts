@@ -38,16 +38,13 @@ export default defineOperationApi<Options>({
 
 			console.log('API called successfully');
 			return({
-				status:"Successful"
+				name:"Successful"
 			});
 		}
 		catch(error:any){
 
-			console.log(error.body);
-			return({
-				name:"Error",
-				message: error.body
-			})
+			console.error(error.body);
+			throw new Error(error.body.message);
 		}
 
 	},
